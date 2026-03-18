@@ -44,6 +44,20 @@ export default function Home() {
         </button>
       ))}
     </div>
+    
+    {/* A text area for the user to enter a message about their mood */}
+    <textarea 
+      placeholder="Say something about your mood...(max 200 chars)"
+      maxLength={140}
+      value={message}
+      onChange={(e) => setMessage(e.target.value)}
+      className="w-full max-w-md bg-gray-800 text-white rounded-x1 p-4 mb-2 resize-none outline-none focus:ring-2 foucus:ring-purple-500" /* Styling for the text area */
+      rows={3}
+    />
+           
+
+      
+
 
   </main>
   )
