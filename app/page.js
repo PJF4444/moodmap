@@ -24,7 +24,7 @@ export default function Home() {
     <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4"> {/* Makes a screen the fit the whole screen with a black background and white text */}
 
     {/* Header */}
-    <h1 className="text-5x1 font-bold mb-2 text-purple-400">MoodMap</h1> {/* Title of the app with styling */}
+    <h1 className="text-5xl font-bold mb-2 text-purple-400">MoodMap</h1> {/* Title of the app with styling */}
 
     {/* Subheader */}
     <p className="text-gray-400 mb-10 text-lg">How are you feeling today?</p> {/* A prompt for the user with styling */}
@@ -51,10 +51,32 @@ export default function Home() {
       maxLength={140}
       value={message}
       onChange={(e) => setMessage(e.target.value)}
-      className="w-full max-w-md bg-gray-800 text-white rounded-x1 p-4 mb-2 resize-none outline-none focus:ring-2 foucus:ring-purple-500" /* Styling for the text area */
+      className="w-full max-w-md bg-gray-800 text-white rounded-xl p-4 mb-2 resize-none outline-none focus:ring-2 focus:ring-purple-500" /* Styling for the text area */
       rows={3}
     />
-           
+
+    {/* a message counter to let the user know how many characters till the limit */}
+    <p className = "text-gray-500 text-sm mb-6 self-end max-w-md">
+      {message.length}/200
+    </p>
+    
+    <button 
+      onClick={handleSubmit}
+      disabled={!selectedEmoji}  // disable the button if no emoji is selected
+      className = {`px-10 py-4 rounded-full text-lg font-bold transition-all duration-200 ${
+        selectedEmoji 
+        ? 'bg-purple-600 hover:bg-purple-500 cursor-pointer'
+        : 'bg-gray-700 cursor-not-allowed opacity-50'
+      }`}
+    >
+      Share My Mood
+    </button>
+
+    {submitted && (
+      <p className = "mt-6 text-green-400 text-lg font-medium">
+        Thank you for sharing your mood!🎊🫶🎉 Feel to browse the results page to see how others are feeling.
+      </p>)}
+      
 
       
 
