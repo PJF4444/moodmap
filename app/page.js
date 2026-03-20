@@ -24,7 +24,7 @@ export default function Home() {
     {icon: '😴', label: 'Tired', id: 4},
   ]
 
-  const emojiList = emojis2.map(currentEmoji => <div className="statElement">{currentEmoji.icon} __placeholder__  </div>);
+  const emojiList = emojis2.map(currentEmoji => <div className="statElement" key={currentEmoji.id} title={"Number of " + currentEmoji.label + " results"}>{currentEmoji.icon} __placeholder__  </div>);
   const handleSubmit = async () => {
     if (!selectedEmoji) return 
     console.log('Submitting: ', selectedEmoji,message)  // log the selected emoji and message for debugging
@@ -89,6 +89,8 @@ export default function Home() {
       </p>)}
      
     <div className="statsbar" key={emojiList.id}> 
+	  <h2 className="statbarheaderA">StatsBar</h2>
+	  <h3 className="statbarheaderB"><i>Emotion Statistics by the Numbers</i></h3>
 	  <div>{emojiList}</div>
     </div>
 

@@ -3,7 +3,7 @@
 }
 .statsbar {
   background-color: #555555;
-  border: 5px solid #eeeeee;
+  border: 5px solid #bbbbff;
   border-radius: 25px;
   top: 5%;
   right: 5%;
@@ -19,4 +19,18 @@
   border-radius: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.statbarheaderA {
+  padding: 4px 4px;
+  color: #aaaaee;
+  font-size: 24px;
+  background-color: #222244;
+  text-align: center;
+  border-radius: 20px;
+}
+.statbarheaderB {
+  margin: 5px;
+  padding: 4px 4px;
+ 
 }
