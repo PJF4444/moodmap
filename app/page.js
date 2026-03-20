@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'   // only takes what is needed for this code to work
 
+import './styles.css';
 export default function Home() {
   const [selectedEmoji, setSelectedEmoji] = useState('')  // state to keep track of the selected option
   const [message, setMessage] = useState('')  // state to keep track of the message to display
@@ -14,6 +15,16 @@ export default function Home() {
     {icon: '😴', label: 'Tired'},
   ]
 
+
+  const emojis2 = [  // Like above, but with unique id numbers for each.
+    {icon: '😀', label: 'Happy', id: 0},
+    {icon: '😢', label: 'Sad', id: 1},
+    {icon: '😡', label: 'Angry', id: 2},
+    {icon: '😍', label: 'Loved', id: 3},
+    {icon: '😴', label: 'Tired', id: 4},
+  ]
+
+  const emojiList = emojis2.map(currentEmoji => <div className="statElement">{currentEmoji.icon} __placeholder__  </div>);
   const handleSubmit = async () => {
     if (!selectedEmoji) return 
     console.log('Submitting: ', selectedEmoji,message)  // log the selected emoji and message for debugging
@@ -76,7 +87,10 @@ export default function Home() {
       <p className = "mt-6 text-green-400 text-lg font-medium">
         Thank you for sharing your mood!🎊🫶🎉 Feel to browse the results page to see how others are feeling.
       </p>)}
-      
+     
+    <div className="statsbar" key={emojiList.id}> 
+	  <div>{emojiList}</div>
+    </div>
 
       
 
