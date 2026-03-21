@@ -1,5 +1,11 @@
 'use client'
 import { useState } from 'react'   // only takes what is needed for this code to work
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY
+
+export const supabase = createClient(supabaseUrl, supabaseKey)
 
 export default function Home() {
   const [selectedEmoji, setSelectedEmoji] = useState('')  // state to keep track of the selected emoji
@@ -23,31 +29,31 @@ export default function Home() {
     {icon: '✅', label: 'Clean and Green'},
   ]
 
-  const handleSubmit = async () => {
-    if (!selectedEmoji || !selectedEnvironment) return 
+const handleSubmit = async () => {
+  if (!selectedEmoji || !selectedEnvironment) return
 
-    try {
-        const response = await fetch('/api/moods', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                emoji: selectedEmoji, 
-                environment: selectedEnvironment,
-                message: message, 
-                latitude: 40.7128,
-                longitude: -74.0060
-             })  // send the selected emoji and message to the server
-        })
-        const data = await response.json()  // wait for the response from the server
-      if (data.success) {
-        setSubmitted(true)  // set the submitted state to true to show the success message
-      }
-    } catch (error) {
-        console.error('Error submitting mood:', error)  // log any errors that occur during submission
-    }       
- }
+  try {
+    const { data, error } = await supabase
+      .from('moods')
+      .insert([{
+        emoji: selectedEmoji,
+        environment: selectedEnvironment,
+        message: message,
+        latitude: 40.7128,
+        longitude: -74.0060
+      }])
+
+    if (error) {
+      console.error('Error saving report:', error)
+      return
+    }
+
+    setSubmitted(true)
+
+  } catch (error) {
+    console.error('Error:', error)
+  }
+}
 
 
   return (
@@ -97,7 +103,7 @@ export default function Home() {
     {/* A text area for the user to enter a message about their mood */}
     <textarea 
       placeholder="Describe what you see around you... (max 200 chars)"
-      maxLength={140}
+      maxLength={200}
       value={message}
       onChange={(e) => setMessage(e.target.value)}
       className="w-full max-w-md bg-blue-900 text-white rounded-xl p-4 mb-2 resize-none outline-none focus:ring-2 focus:ring-green-500" /* Styling for the text area */
