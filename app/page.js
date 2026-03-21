@@ -1,86 +1,63 @@
 'use client'
-import { useState } from 'react'   // only takes what is needed for this code to work
 
-export default function Home() {
-  const [selectedEmoji, setSelectedEmoji] = useState('')  // state to keep track of the selected option
-  const [message, setMessage] = useState('')  // state to keep track of the message to display
-  const [submitted, setSubmitted] = useState(false)  // state to keep track of whether the form has been submitted
+import { useRouter } from 'next/navigation'   // only takes what is needed for this code to work
 
-  const emojis = [  // a stroage of the emojis and their labels
-    {icon: '😀', label: 'Happy'},
-    {icon: '😢', label: 'Sad'},
-    {icon: '😡', label: 'Angry'},
-    {icon: '😍', label: 'Loved'},
-    {icon: '😴', label: 'Tired'},
-  ]
+export default function Welcome() {
+  const router = useRouter()  // initialize the router for navigation
 
-  const handleSubmit = async () => {
-    if (!selectedEmoji) return 
-    console.log('Submitting: ', selectedEmoji,message)  // log the selected emoji and message for debugging
-    setSubmitted(true)  // set submitted to true to show the message
-  }
+  
 
   return (
-    <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4"> {/* Makes a screen the fit the whole screen with a black background and white text */}
-
-    {/* Header */}
-    <h1 className="text-5xl font-bold mb-2 text-purple-400">MoodMap</h1> {/* Title of the app with styling */}
-
-    {/* Subheader */}
-    <p className="text-gray-400 mb-10 text-lg">How are you feeling today?</p> {/* A prompt for the user with styling */}
-
-    <div className="flex gap-4 mb-8">
-      {emojis.map((e) => (  // loop through the emojis and create a button for each one)
-        <button
-          key={e.icon}
-          onClick={() => setSelectedEmoji(e.icon)}
-          className={`text-5x1 p-4 rounded-full transition-all duration-200 ${
-            selectedEmoji === e.icon 
-            ? 'bg-purple-600 scale-125' 
-            : 'bg-gray-800 hover:bg-gray-700 '}`}
-          
-        >
-          {e.icon}
-        </button>
-      ))}
-    </div>
+    <main className = "min-h-screen bg-black-950 text-white flex flex-col items-center justify-center p-8">
     
-    {/* A text area for the user to enter a message about their mood */}
-    <textarea 
-      placeholder="Say something about your mood...(max 200 chars)"
-      maxLength={140}
-      value={message}
-      onChange={(e) => setMessage(e.target.value)}
-      className="w-full max-w-md bg-gray-800 text-white rounded-xl p-4 mb-2 resize-none outline-none focus:ring-2 focus:ring-purple-500" /* Styling for the text area */
-      rows={3}
-    />
+    {/* Logo and Title */}
 
-    {/* a message counter to let the user know how many characters till the limit */}
-    <p className = "text-gray-500 text-sm mb-6 self-end max-w-md">
-      {message.length}/200
+    <p className = "text-8xl mb-6">🌿</p>
+    <h1 className = "text-5xl font-bold mb-4 text-green-400">Welcome to EcoMood</h1>
+
+    {/* Tagline */}
+    <p className = "text-blue-300 text-xl mb-12 text-center max-w-md">
+      Helping communities understand and share their feelings about the environment around them.
     </p>
-    
+
+    {/* Features */}
+<div className="flex flex-col gap-4 mb-12 max-w-md w-full">
+  
+  <div className="bg-blue-900 rounded-xl p-4 flex gap-4 items-center">
+    <span className="text-3xl">🗺️</span>
+    <div>
+      <p className="font-bold text-green-400">Live Environment Map</p>
+      <p className="text-blue-300 text-sm">See real time environmental reports from your community</p>
+    </div>
+  </div>
+
+  <div className="bg-blue-900 rounded-xl p-4 flex gap-4 items-center">
+    <span className="text-3xl">🤖</span>
+    <div>
+      <p className="font-bold text-green-400">AI EcoReport</p>
+      <p className="text-blue-300 text-sm">Daily AI analysis of your city's environmental health</p>
+    </div>
+  </div>
+
+  <div className="bg-blue-900 rounded-xl p-4 flex gap-4 items-center">
+    <span className="text-3xl">🌿</span>
+    <div>
+      <p className="font-bold text-green-400">Anonymous Reporting</p>
+      <p className="text-blue-300 text-sm">Share your environment safely — no account needed</p>
+    </div>
+  </div>
+
+</div>
+    {/* Get Started Button */}
     <button 
-      onClick={handleSubmit}
-      disabled={!selectedEmoji}  // disable the button if no emoji is selected
-      className = {`px-10 py-4 rounded-full text-lg font-bold transition-all duration-200 ${
-        selectedEmoji 
-        ? 'bg-purple-600 hover:bg-purple-500 cursor-pointer'
-        : 'bg-gray-700 cursor-not-allowed opacity-50'
-      }`}
+      onClick ={() => router.push('/moodmap')}  // navigate to the moodmap page when clicked
+      className = "px-12 py-4 bg-green-600 hover:bg-green-500 text-white text-xl font-bold rounded-full transition-all duration-200"
     >
-      Share My Mood
-    </button>
+      Get Started 😎
+    </button> 
 
-    {submitted && (
-      <p className = "mt-6 text-green-400 text-lg font-medium">
-        Thank you for sharing your mood!🎊🫶🎉 Feel to browse the results page to see how others are feeling.
-      </p>)}
-      
-
-      
-
-
-  </main>
+    </main>
   )
 }
+
+
