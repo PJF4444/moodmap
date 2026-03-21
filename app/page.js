@@ -1,11 +1,37 @@
 'use client'
 
+<<<<<<< HEAD
 import { useRouter } from 'next/navigation'   // only takes what is needed for this code to work
+=======
+import './styles.css';
+export default function Home() {
+  const [selectedEmoji, setSelectedEmoji] = useState('')  // state to keep track of the selected option
+  const [message, setMessage] = useState('')  // state to keep track of the message to display
+  const [submitted, setSubmitted] = useState(false)  // state to keep track of whether the form has been submitted
+>>>>>>> fd4049a66a162068b91e11bb477fb330195795a3
 
 export default function Welcome() {
   const router = useRouter()  // initialize the router for navigation
 
+<<<<<<< HEAD
   
+=======
+
+  const emojis2 = [  // Like above, but with unique id numbers for each.
+    {icon: '😀', label: 'Happy', id: 0},
+    {icon: '😢', label: 'Sad', id: 1},
+    {icon: '😡', label: 'Angry', id: 2},
+    {icon: '😍', label: 'Loved', id: 3},
+    {icon: '😴', label: 'Tired', id: 4},
+  ]
+
+  const emojiList = emojis2.map(currentEmoji => <div className="statElement" key={currentEmoji.id} title={"Number of " + currentEmoji.label + " results"}>{currentEmoji.icon} __placeholder__  </div>);
+  const handleSubmit = async () => {
+    if (!selectedEmoji) return 
+    console.log('Submitting: ', selectedEmoji,message)  // log the selected emoji and message for debugging
+    setSubmitted(true)  // set submitted to true to show the message
+  }
+>>>>>>> fd4049a66a162068b91e11bb477fb330195795a3
 
   return (
     <main className = "min-h-screen bg-black-950 text-white flex flex-col items-center justify-center p-8">
@@ -56,8 +82,28 @@ export default function Welcome() {
       Get Started 😎
     </button> 
 
+<<<<<<< HEAD
     </main>
   )
 }
 
 
+=======
+    {submitted && (
+      <p className = "mt-6 text-green-400 text-lg font-medium">
+        Thank you for sharing your mood!🎊🫶🎉 Feel to browse the results page to see how others are feeling.
+      </p>)}
+     
+    <div className="statsbar" key={emojiList.id}> 
+	  <h2 className="statbarheaderA">StatsBar</h2>
+	  <h3 className="statbarheaderB"><i>Emotion Statistics by the Numbers</i></h3>
+	  <div>{emojiList}</div>
+    </div>
+
+      
+
+
+  </main>
+  )
+}
+>>>>>>> fd4049a66a162068b91e11bb477fb330195795a3
