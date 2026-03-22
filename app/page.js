@@ -9,7 +9,7 @@ export default function Welcome() {
   
 
   return (
-    <main className = "min-h-screen bg-black-950 text-white flex flex-col items-center justify-center p-8">
+    <main className = "min-h-screen bg-black text-white flex flex-col items-center justify-center p-8">
     
     {/* Logo and Title */}
 
